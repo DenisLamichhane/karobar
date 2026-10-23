@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="overflow-x-hidden">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <title>Robux Karobar Nepal — Trusted Roblox Store</title>
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -11,9 +11,19 @@
   <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
   <!-- Babel for compiling JSX in the browser -->
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <style>
+    html, body {
+      max-width: 100vw;
+      overflow-x: hidden;
+      -webkit-tap-highlight-color: transparent;
+    }
+    input[type="range"] {
+      touch-action: pan-y;
+    }
+  </style>
 </head>
-<body class="bg-slate-950 text-slate-100">
-  <div id="root"></div>
+<body class="bg-slate-950 text-slate-100 overflow-x-hidden w-full">
+  <div id="root" class="overflow-x-hidden w-full"></div>
 
   <script type="text/babel">
     const { useState, useEffect, useMemo, useRef } = React;
@@ -41,20 +51,9 @@
     const AlertCircle = ({ className }) => <IconWrapper className={className}><circle cx="12" cy="12" r="10"/><line x1="12" x2="12" y1="8" y2="12"/><line x1="12" x2="12.01" y1="16" y2="16"/></IconWrapper>;
     const Sparkles = ({ className }) => <IconWrapper className={className}><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/></IconWrapper>;
     const ArrowRight = ({ className }) => <IconWrapper className={className}><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></IconWrapper>;
-    const Copy = ({ className }) => <IconWrapper className={className}><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></IconWrapper>;
-    const Check = ({ className }) => <IconWrapper className={className}><path d="M20 6 9 17l-5-5"/></IconWrapper>;
-    const RefreshCw = ({ className }) => <IconWrapper className={className}><path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"/><path d="M8 16H3v5"/></IconWrapper>;
     const User = ({ className }) => <IconWrapper className={className}><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></IconWrapper>;
-    const CreditCard = ({ className }) => <IconWrapper className={className}><rect width="20" height="14" x="2" y="5" rx="2"/><line x1="2" x2="22" y1="10" y2="10"/></IconWrapper>;
-    const PackageCheck = ({ className }) => <IconWrapper className={className}><path d="m16 16 2 2 4-4"/><path d="M21 10V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l2-1.14"/><path d="m7.5 4.27 9 5.15"/><polyline points="3.29 7 12 12 20.71 7"/><line x1="12" x2="12" y1="22" y2="12"/></IconWrapper>;
-    const XCircle = ({ className }) => <IconWrapper className={className}><circle cx="12" cy="12" r="10"/><path d="m15 9-6 6"/><path d="m9 9 6 6"/></IconWrapper>;
-    const Award = ({ className }) => <IconWrapper className={className}><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></IconWrapper>;
     const QrCode = ({ className }) => <IconWrapper className={className}><rect width="5" height="5" x="3" y="3" rx="1"/><rect width="5" height="5" x="16" y="3" rx="1"/><rect width="5" height="5" x="3" y="16" rx="1"/><path d="M21 16h-3a2 2 0 0 0-2 2v3"/><path d="M21 21v.01"/><path d="M12 7v3a2 2 0 0 1-2 2H7"/><path d="M3 12h.01"/><path d="M12 3h.01"/><path d="M12 16v.01"/><path d="M16 12h1"/><path d="M21 12v.01"/><path d="M12 21v-1"/></IconWrapper>;
     const LogOut = ({ className }) => <IconWrapper className={className}><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" x2="9" y1="12" y2="12"/></IconWrapper>;
-    const Settings = ({ className }) => <IconWrapper className={className}><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></IconWrapper>;
-    const Mail = ({ className }) => <IconWrapper className={className}><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></IconWrapper>;
-    const KeyRound = ({ className }) => <IconWrapper className={className}><path d="M2 18v3c0 .6.4 1 1 1h4v-3h3v-3h2l1.4-1.4a6.5 6.5 0 1 0-4-4Z"/><circle cx="16.5" cy="7.5" r=".5"/></IconWrapper>;
-    const UserPlus = ({ className }) => <IconWrapper className={className}><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="19" x2="19" y1="8" y2="14"/><line x1="22" x2="16" y1="11" y2="11"/></IconWrapper>;
     const LogIn = ({ className }) => <IconWrapper className={className}><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" x2="3" y1="12" y2="12"/></IconWrapper>;
 
     const RobuxIcon = ({ className = 'w-5 h-5' }) => (
@@ -176,7 +175,6 @@
       // Live Tracker & Review States
       const [trackedOrderId, setTrackedOrderId] = useState('');
       const [searchQuery, setSearchQuery] = useState('');
-      const [copiedId, setCopiedId] = useState(false);
       const [reviewRating, setReviewRating] = useState(5);
       const [reviewComment, setReviewComment] = useState('');
       const [reviewUsername, setReviewUsername] = useState('');
@@ -580,167 +578,219 @@
       );
 
       return (
-        <div className="min-h-screen bg-slate-950 text-slate-100 font-sans selection:bg-emerald-500 selection:text-slate-950">
+        <div className="min-h-screen w-full max-w-[100vw] overflow-x-hidden bg-slate-950 text-slate-100 font-sans selection:bg-emerald-500 selection:text-slate-950">
           {/* Top Rate Announcement Bar */}
-          <div className="bg-gradient-to-r from-emerald-950 via-slate-900 to-emerald-950 border-b border-emerald-500/20 px-4 py-2 text-xs sm:text-sm">
-            <div className="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-2">
-              <div className="flex items-center gap-2 font-medium text-emerald-300">
-                <Sparkles className="w-4 h-4 text-emerald-400 shrink-0" />
+          <div className="bg-gradient-to-r from-emerald-950 via-slate-900 to-emerald-950 border-b border-emerald-500/20 px-3 py-2 text-[11px] sm:text-xs">
+            <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-1 text-center sm:text-left">
+              <div className="flex items-center justify-center gap-1.5 font-medium text-emerald-300 flex-wrap">
+                <Sparkles className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
                 <span>
-                  <strong>Official Nepal Rate:</strong> 100 Robux = Rs. 350 NPR •{' '}
-                  <span className="text-amber-300">Minimum Order: 50 Robux (Rs. 200)</span>
+                  <strong>Nepal Rate:</strong> 100 R$ = Rs. 350 •{' '}
+                  <span className="text-amber-300">Min: 50 R$ (Rs. 200)</span>
                 </span>
               </div>
-              <div className="flex items-center gap-4 text-slate-300 text-xs">
+              <div className="hidden md:flex items-center gap-4 text-slate-300 text-xs">
                 <span className="flex items-center gap-1">
                   <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" /> 100% Anti-Scam Verified
                 </span>
-                <span className="hidden sm:flex items-center gap-1">
-                  <Clock className="w-3.5 h-3.5 text-emerald-400" /> Instant Live Status Tracker
+                <span className="flex items-center gap-1">
+                  <Clock className="w-3.5 h-3.5 text-emerald-400" /> Live Status Tracker
                 </span>
               </div>
             </div>
           </div>
 
-          {/* Main Navigation Header */}
-          <header className="sticky top-0 z-40 backdrop-blur-xl bg-slate-950/85 border-b border-slate-800/80">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 py-3.5 flex items-center justify-between gap-3">
-              <div
-                onClick={() => {
-                  setActiveTab('shop');
-                  handleLogoSecretClick();
-                }}
-                className="flex items-center gap-3 cursor-pointer group select-none"
-              >
-                <div className="w-11 h-11 rounded-xl bg-gradient-to-br from-emerald-400 to-teal-600 flex items-center justify-center shadow-lg shadow-emerald-500/20 group-hover:scale-105 transition-transform">
-                  <RobuxIcon className="w-6 h-6 text-slate-950" />
-                </div>
-                <div>
-                  <div className="flex items-center gap-2">
-                    <h1 className="text-xl font-extrabold tracking-tight text-white">
-                      ROBUX <span className="text-emerald-400">KAROBAR</span>
-                    </h1>
-                    <span className="text-[10px] font-bold uppercase px-2 py-0.5 rounded-full bg-emerald-500/15 text-emerald-400 border border-emerald-500/30">
-                      NP
-                    </span>
-                  </div>
-                  <p className="text-xs text-slate-400">Trusted Nepali Roblox Store</p>
-                </div>
-              </div>
-
-              <nav className="flex items-center gap-1 sm:gap-2 overflow-x-auto py-1">
-                <button
-                  onClick={() => setActiveTab('shop')}
-                  className={`px-3.5 py-2 rounded-lg text-xs sm:text-sm font-semibold transition-all flex items-center gap-1.5 whitespace-nowrap ${
-                    activeTab === 'shop'
-                      ? 'bg-emerald-500 text-slate-950 shadow-md shadow-emerald-500/20'
-                      : 'text-slate-300 hover:text-white hover:bg-slate-800/70'
-                  }`}
-                >
-                  <ShoppingCart className="w-4 h-4" />
-                  <span>Buy Robux</span>
-                </button>
-
-                <button
+          {/* Responsive Mobile-Friendly Navigation Header */}
+          <header className="sticky top-0 z-40 backdrop-blur-xl bg-slate-950/90 border-b border-slate-800/80 w-full">
+            <div className="max-w-7xl mx-auto px-3 sm:px-6 py-2.5 sm:py-3.5 flex flex-col md:flex-row md:items-center md:justify-between gap-2.5">
+              
+              {/* Top Row on Mobile: Brand Logo + Account Login Button */}
+              <div className="flex items-center justify-between w-full md:w-auto">
+                <div
                   onClick={() => {
                     setActiveTab('shop');
-                    setTimeout(() => trackerSectionRef.current?.scrollIntoView({ behavior: 'smooth' }), 100);
+                    handleLogoSecretClick();
                   }}
-                  className="px-3.5 py-2 rounded-lg text-xs sm:text-sm font-semibold text-slate-300 hover:text-white hover:bg-slate-800/70 transition-all flex items-center gap-1.5 whitespace-nowrap"
+                  className="flex items-center gap-2.5 cursor-pointer group select-none min-w-0"
                 >
-                  <Clock className="w-4 h-4 text-emerald-400" />
-                  <span>Track Order</span>
-                </button>
+                  <div className="w-9 h-9 sm:w-11 sm:h-11 rounded-xl bg-gradient-to-br from-emerald-400 to-teal-600 flex items-center justify-center shadow-lg shadow-emerald-500/20 shrink-0">
+                    <RobuxIcon className="w-5 h-5 sm:w-6 sm:h-6 text-slate-950" />
+                  </div>
+                  <div className="min-w-0">
+                    <div className="flex items-center gap-1.5">
+                      <h1 className="text-base sm:text-xl font-extrabold tracking-tight text-white truncate">
+                        ROBUX <span className="text-emerald-400">KAROBAR</span>
+                      </h1>
+                      <span className="text-[9px] font-bold uppercase px-1.5 py-0.5 rounded-full bg-emerald-500/15 text-emerald-400 border border-emerald-500/30 shrink-0">
+                        NP
+                      </span>
+                    </div>
+                    <p className="text-[10px] sm:text-xs text-slate-400 truncate">Trusted Nepali Roblox Store</p>
+                  </div>
+                </div>
 
-                <button
-                  onClick={() => setActiveTab('reviews')}
-                  className={`px-3.5 py-2 rounded-lg text-xs sm:text-sm font-semibold transition-all flex items-center gap-1.5 whitespace-nowrap ${
-                    activeTab === 'reviews'
-                      ? 'bg-emerald-500 text-slate-950 shadow-md shadow-emerald-500/20'
-                      : 'text-slate-300 hover:text-white hover:bg-slate-800/70'
-                  }`}
-                >
-                  <Star className="w-4 h-4" />
-                  <span>Reviews ({reviews.length + 3})</span>
-                </button>
-
-                <button
-                  onClick={() => setActiveTab('policies')}
-                  className={`px-3.5 py-2 rounded-lg text-xs sm:text-sm font-semibold transition-all flex items-center gap-1.5 whitespace-nowrap ${
-                    activeTab === 'policies'
-                      ? 'bg-emerald-500 text-slate-950 shadow-md shadow-emerald-500/20'
-                      : 'text-slate-300 hover:text-white hover:bg-slate-800/70'
-                  }`}
-                >
-                  <ShieldCheck className="w-4 h-4" />
-                  <span className="hidden md:inline">Terms & Anti-Scam</span>
-                  <span className="md:hidden">Terms</span>
-                </button>
-
-                {customerAccount ? (
-                  <div className="flex items-center gap-1.5 pl-1 sm:pl-2 border-l border-slate-800">
+                {/* Mobile Account / Login Button */}
+                <div className="flex md:hidden items-center gap-1.5 shrink-0">
+                  {customerAccount ? (
+                    <>
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setActiveTab('shop');
+                          setTimeout(() => trackerSectionRef.current?.scrollIntoView({ behavior: 'smooth' }), 100);
+                        }}
+                        className="px-2.5 py-1.5 rounded-lg bg-slate-900 border border-emerald-500/30 text-xs font-bold text-emerald-300 flex items-center gap-1 max-w-[125px]"
+                      >
+                        <User className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
+                        <span className="truncate">{customerAccount.email.split('@')[0]}</span>
+                        <span className="px-1.5 rounded-full bg-emerald-500/20 text-emerald-300 text-[10px]">
+                          {myCustomerOrders.length}
+                        </span>
+                      </button>
+                      <button
+                        type="button"
+                        onClick={handleCustomerLogout}
+                        className="p-1.5 rounded-lg bg-slate-900 text-slate-400 hover:text-rose-400 border border-slate-800"
+                        title="Log Out"
+                      >
+                        <LogOut className="w-4 h-4" />
+                      </button>
+                    </>
+                  ) : (
                     <button
                       type="button"
                       onClick={() => {
-                        setActiveTab('shop');
-                        setTimeout(() => trackerSectionRef.current?.scrollIntoView({ behavior: 'smooth' }), 100);
+                        setAuthMode('login');
+                        setAuthError('');
+                        setShowAuthModal(true);
                       }}
-                      className="px-3 py-1.5 rounded-lg bg-slate-900 border border-emerald-500/30 text-xs font-bold text-emerald-300 flex items-center gap-1.5 max-w-[160px] truncate"
+                      className="px-3 py-1.5 rounded-lg text-xs font-bold bg-slate-900 text-emerald-400 border border-emerald-500/40 flex items-center gap-1 shrink-0"
                     >
-                      <User className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
-                      <span className="truncate">{customerAccount.email.split('@')[0]}</span>
-                      <span className="px-1.5 py-0.2 rounded-full bg-emerald-500/20 text-emerald-300 text-[10px]">
-                        {myCustomerOrders.length}
-                      </span>
+                      <LogIn className="w-3.5 h-3.5" />
+                      <span>Login</span>
                     </button>
+                  )}
+                </div>
+              </div>
+
+              {/* Navigation Tabs: 4-Column Grid on Mobile, Inline on Desktop */}
+              <div className="flex items-center justify-between md:justify-end gap-2 w-full md:w-auto">
+                <nav className="grid grid-cols-4 md:flex items-center gap-1 sm:gap-2 w-full md:w-auto bg-slate-900/70 md:bg-transparent p-1 md:p-0 rounded-xl border border-slate-800/80 md:border-none">
+                  <button
+                    onClick={() => setActiveTab('shop')}
+                    className={`px-2 sm:px-3.5 py-2 rounded-lg text-[11px] sm:text-sm font-bold transition-all flex items-center justify-center gap-1 whitespace-nowrap ${
+                      activeTab === 'shop'
+                        ? 'bg-emerald-500 text-slate-950 shadow-sm'
+                        : 'text-slate-300 hover:text-white'
+                    }`}
+                  >
+                    <ShoppingCart className="w-3.5 h-3.5 shrink-0" />
+                    <span>Buy</span>
+                  </button>
+
+                  <button
+                    onClick={() => {
+                      setActiveTab('shop');
+                      setTimeout(() => trackerSectionRef.current?.scrollIntoView({ behavior: 'smooth' }), 100);
+                    }}
+                    className="px-2 sm:px-3.5 py-2 rounded-lg text-[11px] sm:text-sm font-bold text-slate-300 hover:text-white transition-all flex items-center justify-center gap-1 whitespace-nowrap"
+                  >
+                    <Clock className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
+                    <span>Track</span>
+                  </button>
+
+                  <button
+                    onClick={() => setActiveTab('reviews')}
+                    className={`px-2 sm:px-3.5 py-2 rounded-lg text-[11px] sm:text-sm font-bold transition-all flex items-center justify-center gap-1 whitespace-nowrap ${
+                      activeTab === 'reviews'
+                        ? 'bg-emerald-500 text-slate-950 shadow-sm'
+                        : 'text-slate-300 hover:text-white'
+                    }`}
+                  >
+                    <Star className="w-3.5 h-3.5 shrink-0" />
+                    <span>Reviews</span>
+                  </button>
+
+                  <button
+                    onClick={() => setActiveTab('policies')}
+                    className={`px-2 sm:px-3.5 py-2 rounded-lg text-[11px] sm:text-sm font-bold transition-all flex items-center justify-center gap-1 whitespace-nowrap ${
+                      activeTab === 'policies'
+                        ? 'bg-emerald-500 text-slate-950 shadow-sm'
+                        : 'text-slate-300 hover:text-white'
+                    }`}
+                  >
+                    <ShieldCheck className="w-3.5 h-3.5 shrink-0" />
+                    <span>Terms</span>
+                  </button>
+                </nav>
+
+                {/* Desktop Account / Login Button */}
+                <div className="hidden md:flex items-center gap-1.5 pl-2 border-l border-slate-800 shrink-0">
+                  {customerAccount ? (
+                    <>
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setActiveTab('shop');
+                          setTimeout(() => trackerSectionRef.current?.scrollIntoView({ behavior: 'smooth' }), 100);
+                        }}
+                        className="px-3 py-1.5 rounded-lg bg-slate-900 border border-emerald-500/30 text-xs font-bold text-emerald-300 flex items-center gap-1.5 max-w-[160px] truncate"
+                      >
+                        <User className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
+                        <span className="truncate">{customerAccount.email.split('@')[0]}</span>
+                        <span className="px-1.5 py-0.2 rounded-full bg-emerald-500/20 text-emerald-300 text-[10px]">
+                          {myCustomerOrders.length}
+                        </span>
+                      </button>
+                      <button
+                        type="button"
+                        onClick={handleCustomerLogout}
+                        className="p-2 rounded-lg bg-slate-900 hover:bg-rose-500/15 text-slate-400 hover:text-rose-400 border border-slate-800 transition-all"
+                        title="Log Out"
+                      >
+                        <LogOut className="w-4 h-4" />
+                      </button>
+                    </>
+                  ) : (
                     <button
                       type="button"
-                      onClick={handleCustomerLogout}
-                      className="p-2 rounded-lg bg-slate-900 hover:bg-rose-500/15 text-slate-400 hover:text-rose-400 border border-slate-800 transition-all"
-                      title="Log Out"
+                      onClick={() => {
+                        setAuthMode('login');
+                        setAuthError('');
+                        setShowAuthModal(true);
+                      }}
+                      className="px-3.5 py-2 rounded-lg text-xs sm:text-sm font-bold bg-slate-900 hover:bg-slate-800 text-emerald-400 border border-emerald-500/40 transition-all flex items-center gap-1.5 whitespace-nowrap"
                     >
-                      <LogOut className="w-4 h-4" />
+                      <LogIn className="w-4 h-4" />
+                      <span>Login / Sign Up</span>
                     </button>
-                  </div>
-                ) : (
-                  <button
-                    type="button"
-                    onClick={() => {
-                      setAuthMode('login');
-                      setAuthError('');
-                      setShowAuthModal(true);
-                    }}
-                    className="ml-1 px-3.5 py-2 rounded-lg text-xs sm:text-sm font-bold bg-slate-900 hover:bg-slate-800 text-emerald-400 border border-emerald-500/40 transition-all flex items-center gap-1.5 whitespace-nowrap"
-                  >
-                    <LogIn className="w-4 h-4" />
-                    <span>Login / Sign Up</span>
-                  </button>
-                )}
-              </nav>
+                  )}
+                </div>
+              </div>
             </div>
           </header>
 
           {/* Main Content */}
-          <main className="max-w-7xl mx-auto px-4 sm:px-6 py-8 space-y-12">
+          <main className="max-w-7xl mx-auto px-3 sm:px-6 py-5 sm:py-8 space-y-8 sm:space-y-12 w-full">
             {activeTab === 'shop' && (
               <>
                 {/* 1. Calculator */}
-                <section className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-slate-900 via-slate-900 to-emerald-950/60 border border-emerald-500/30 shadow-2xl p-6 sm:p-8">
+                <section className="relative overflow-hidden rounded-2xl sm:rounded-3xl bg-gradient-to-br from-slate-900 via-slate-900 to-emerald-950/60 border border-emerald-500/30 shadow-2xl p-4 sm:p-8">
                   <div className="max-w-4xl mx-auto">
-                    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
+                    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4 mb-5">
                       <div>
-                        <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-emerald-500/15 text-emerald-400 border border-emerald-500/30 mb-2">
-                          <Calculator className="w-3.5 h-3.5" /> INSTANT ROBUX RATE CALCULATOR
+                        <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-bold bg-emerald-500/15 text-emerald-400 border border-emerald-500/30 mb-2">
+                          <Calculator className="w-3.5 h-3.5" /> ROBUX RATE CALCULATOR
                         </span>
-                        <h2 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
-                          Check How Much Robux You Get For Your Rs.
+                        <h2 className="text-xl sm:text-3xl font-extrabold text-white tracking-tight">
+                          Check How Much Robux You Get
                         </h2>
-                        <p className="text-slate-400 text-sm mt-1">
-                          Rate: <strong className="text-emerald-400">100 Robux = Rs. 350</strong> • Minimum Order:{' '}
-                          <strong className="text-amber-300">50 Robux = Rs. 200</strong>
+                        <p className="text-slate-400 text-xs sm:text-sm mt-1">
+                          Rate: <strong className="text-emerald-400">100 R$ = Rs. 350</strong> • Min:{' '}
+                          <strong className="text-amber-300">50 R$ = Rs. 200</strong>
                         </p>
                       </div>
-                      <div className="flex flex-wrap gap-1.5">
+                      <div className="grid grid-cols-3 sm:flex sm:flex-wrap gap-1.5">
                         {[
                           { r: 50, n: 200 },
                           { r: 100, n: 350 },
@@ -755,21 +805,21 @@
                               setCalcRobux(String(preset.r));
                               setCalcNpr(String(preset.n));
                             }}
-                            className="px-2.5 py-1.5 rounded-lg bg-slate-800/90 hover:bg-emerald-500/20 border border-slate-700 text-xs font-semibold text-slate-200 transition-all"
+                            className="px-2 py-1.5 rounded-lg bg-slate-800/90 hover:bg-emerald-500/20 border border-slate-700 text-[11px] font-semibold text-slate-200 transition-all text-center"
                           >
-                            {preset.r} R$ = Rs.{preset.n}
+                            {preset.r} R$
                           </button>
                         ))}
                       </div>
                     </div>
 
-                    <div className="grid grid-cols-1 md:grid-cols-11 gap-4 items-center">
-                      <div className="md:col-span-5 bg-slate-950/90 border border-slate-800 rounded-2xl p-4">
-                        <label className="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-1.5">
+                    <div className="grid grid-cols-1 md:grid-cols-11 gap-3 sm:gap-4 items-center">
+                      <div className="md:col-span-5 bg-slate-950/90 border border-slate-800 rounded-2xl p-3.5 sm:p-4 min-w-0">
+                        <label className="block text-[11px] font-bold uppercase tracking-wider text-slate-400 mb-1">
                           You Pay (Nepali Rupees - NPR)
                         </label>
-                        <div className="flex items-center gap-3">
-                          <span className="text-lg font-extrabold text-amber-400 bg-amber-400/10 px-3 py-1.5 rounded-xl border border-amber-400/20">
+                        <div className="flex items-center gap-2.5">
+                          <span className="text-base sm:text-lg font-extrabold text-amber-400 bg-amber-400/10 px-2.5 py-1 rounded-xl border border-amber-400/20 shrink-0">
                             Rs.
                           </span>
                           <input
@@ -778,24 +828,24 @@
                             step="10"
                             value={calcNpr}
                             onChange={(e) => handleCalcNprChange(e.target.value)}
-                            className="w-full bg-transparent text-2xl font-extrabold text-white focus:outline-none"
+                            className="w-full min-w-0 bg-transparent text-xl sm:text-2xl font-extrabold text-white focus:outline-none"
                           />
                         </div>
                       </div>
 
-                      <div className="md:col-span-1 flex justify-center">
-                        <div className="w-10 h-10 rounded-full bg-emerald-500/15 border border-emerald-500/30 flex items-center justify-center text-emerald-400 font-bold">
-                          ⇄
+                      <div className="md:col-span-1 flex justify-center py-0.5 md:py-0">
+                        <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-emerald-500/15 border border-emerald-500/30 flex items-center justify-center text-emerald-400 font-bold text-sm">
+                          ⇅
                         </div>
                       </div>
 
-                      <div className="md:col-span-5 bg-slate-950/90 border border-slate-800 rounded-2xl p-4">
-                        <label className="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-1.5">
+                      <div className="md:col-span-5 bg-slate-950/90 border border-slate-800 rounded-2xl p-3.5 sm:p-4 min-w-0">
+                        <label className="block text-[11px] font-bold uppercase tracking-wider text-slate-400 mb-1">
                           You Receive (Robux Amount)
                         </label>
-                        <div className="flex items-center gap-3">
-                          <span className="p-2 rounded-xl bg-emerald-500/15 border border-emerald-500/30 text-emerald-400">
-                            <RobuxIcon className="w-5 h-5" />
+                        <div className="flex items-center gap-2.5">
+                          <span className="p-2 rounded-xl bg-emerald-500/15 border border-emerald-500/30 text-emerald-400 shrink-0">
+                            <RobuxIcon className="w-4 h-4 sm:w-5 sm:h-5" />
                           </span>
                           <input
                             type="number"
@@ -803,27 +853,26 @@
                             step="10"
                             value={calcRobux}
                             onChange={(e) => handleCalcRobuxChange(e.target.value)}
-                            className="w-full bg-transparent text-2xl font-extrabold text-emerald-400 focus:outline-none"
+                            className="w-full min-w-0 bg-transparent text-xl sm:text-2xl font-extrabold text-emerald-400 focus:outline-none"
                           />
-                          <span className="text-xs font-bold text-slate-400 uppercase pr-1">R$</span>
+                          <span className="text-xs font-bold text-slate-400 uppercase pr-1 shrink-0">R$</span>
                         </div>
                       </div>
                     </div>
 
-                    <div className="mt-5 pt-5 border-t border-slate-800/80 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-                      <div className="flex items-start gap-2.5 text-xs sm:text-sm text-slate-300">
-                        <ShieldCheck className="w-5 h-5 text-emerald-400 shrink-0 mt-0.5" />
-                        <div>
-                          <span className="font-semibold text-white">Instant Rate Summary: </span>
-                          For <strong className="text-emerald-400">Rs. {calcNpr || 0}</strong>, you will receive{' '}
+                    <div className="mt-4 pt-4 border-t border-slate-800/80 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3">
+                      <div className="flex items-center gap-2 text-xs sm:text-sm text-slate-300">
+                        <ShieldCheck className="w-4 h-4 sm:w-5 sm:h-5 text-emerald-400 shrink-0" />
+                        <span>
+                          For <strong className="text-emerald-400">Rs. {calcNpr || 0}</strong>, you get{' '}
                           <strong className="text-emerald-400">{calcRobux || 0} Robux</strong>!
-                        </div>
+                        </span>
                       </div>
                       <button
                         type="button"
                         disabled={Number(calcRobux) < 50}
                         onClick={applyCalcToOrder}
-                        className="w-full sm:w-auto px-5 py-3 rounded-xl bg-emerald-500 hover:bg-emerald-400 disabled:opacity-40 text-slate-950 font-extrabold text-sm flex items-center justify-center gap-2 shadow-lg shadow-emerald-500/20"
+                        className="w-full sm:w-auto px-5 py-3 rounded-xl bg-emerald-500 hover:bg-emerald-400 disabled:opacity-40 text-slate-950 font-extrabold text-xs sm:text-sm flex items-center justify-center gap-2 shadow-lg shadow-emerald-500/20"
                       >
                         <span>Order {Number(calcRobux) >= 50 ? `${calcRobux} R$ for Rs. ${calcNpr}` : 'Now'}</span>
                         <ArrowRight className="w-4 h-4" />
@@ -833,55 +882,56 @@
                 </section>
 
                 {/* 2. Ordering Form & QR */}
-                <section ref={orderSectionRef} className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-                  <div className="lg:col-span-7 bg-slate-900/90 border border-slate-800 rounded-3xl p-6 sm:p-8 shadow-xl">
-                    <div className="flex items-center justify-between border-b border-slate-800 pb-5 mb-6">
-                      <div>
-                        <span className="text-xs font-bold uppercase tracking-wider text-emerald-400">
+                <section ref={orderSectionRef} className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 items-start">
+                  <div className="lg:col-span-7 bg-slate-900/90 border border-slate-800 rounded-2xl sm:rounded-3xl p-4 sm:p-8 shadow-xl min-w-0">
+                    <div className="flex items-center justify-between border-b border-slate-800 pb-4 mb-5 gap-2">
+                      <div className="min-w-0">
+                        <span className="text-[10px] sm:text-xs font-bold uppercase tracking-wider text-emerald-400 block">
                           FAST & SAFE ROBUX DELIVERY
                         </span>
-                        <h3 className="text-2xl font-extrabold text-white mt-0.5">Place Your Robux Order</h3>
+                        <h3 className="text-lg sm:text-2xl font-extrabold text-white truncate">Place Your Robux Order</h3>
                       </div>
-                      <div className="px-3.5 py-2 rounded-xl bg-slate-950 border border-slate-800 text-right">
-                        <span className="block text-[11px] text-slate-400">Total To Pay</span>
-                        <span className="text-lg font-extrabold text-emerald-400">Rs. {orderNprPrice}</span>
+                      <div className="px-3 py-1.5 rounded-xl bg-slate-950 border border-slate-800 text-right shrink-0">
+                        <span className="block text-[10px] text-slate-400">Total</span>
+                        <span className="text-base sm:text-lg font-extrabold text-emerald-400">Rs. {orderNprPrice}</span>
                       </div>
                     </div>
 
                     {customerAccount ? (
-                      <div className="mb-6 p-3.5 rounded-2xl bg-emerald-500/10 border border-emerald-500/30 flex flex-wrap items-center justify-between gap-2 text-xs">
-                        <div className="flex items-center gap-2 text-emerald-300">
+                      <div className="mb-5 p-3 rounded-2xl bg-emerald-500/10 border border-emerald-500/30 flex flex-wrap items-center justify-between gap-2 text-xs">
+                        <div className="flex items-center gap-1.5 text-emerald-300 min-w-0">
                           <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
-                          <span>Ordering as <strong className="text-white">{customerAccount.email}</strong></span>
+                          <span className="truncate">Ordering as <strong className="text-white break-all">{customerAccount.email}</strong></span>
                         </div>
-                        <button type="button" onClick={handleCustomerLogout} className="text-slate-400 hover:text-white underline font-semibold">
-                          Switch Account
+                        <button type="button" onClick={handleCustomerLogout} className="text-slate-400 hover:text-white underline font-semibold shrink-0">
+                          Switch
                         </button>
                       </div>
                     ) : (
-                      <div className="mb-6 p-4 rounded-2xl bg-amber-500/10 border border-amber-500/30 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-                        <div className="flex items-start gap-2.5 text-xs text-amber-200">
+                      <div className="mb-5 p-3.5 rounded-2xl bg-amber-500/10 border border-amber-500/30 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                        <div className="flex items-start gap-2 text-xs text-amber-200">
                           <Lock className="w-4 h-4 text-amber-400 shrink-0 mt-0.5" />
                           <div>
                             <p className="font-bold text-white">Account Required for Order Privacy</p>
-                            <p className="text-slate-300 mt-0.5">Log in or create an account so only you can view your orders.</p>
+                            <p className="text-slate-300 mt-0.5">Log in or sign up so only you can view your orders.</p>
                           </div>
                         </div>
                         <button
                           type="button"
                           onClick={() => { setAuthMode('login'); setAuthError(''); setShowAuthModal(true); }}
-                          className="px-4 py-2 rounded-xl bg-amber-400 hover:bg-amber-300 text-slate-950 font-extrabold text-xs shrink-0"
+                          className="w-full sm:w-auto px-4 py-2.5 rounded-xl bg-amber-400 hover:bg-amber-300 text-slate-950 font-extrabold text-xs shrink-0"
                         >
                           Login / Sign Up
                         </button>
                       </div>
                     )}
 
-                    <form onSubmit={handlePlaceOrder} className="space-y-6">
-                      <div className="bg-slate-950/60 border border-slate-800/90 rounded-2xl p-5">
-                        <label className="block text-sm font-bold text-white mb-2">1. Your Roblox Username</label>
+                    <form onSubmit={handlePlaceOrder} className="space-y-5">
+                      {/* Step 1: Roblox Username */}
+                      <div className="bg-slate-950/60 border border-slate-800/90 rounded-2xl p-4 sm:p-5">
+                        <label className="block text-xs sm:text-sm font-bold text-white mb-2">1. Your Roblox Username</label>
                         <div className="relative flex items-center">
-                          <User className="w-5 h-5 text-slate-500 absolute left-3.5" />
+                          <User className="w-4 h-4 sm:w-5 sm:h-5 text-slate-500 absolute left-3.5" />
                           <input
                             type="text"
                             required
@@ -891,20 +941,21 @@
                               setUsernameVerified(e.target.value.trim().length >= 3);
                             }}
                             placeholder="Enter exact Roblox username"
-                            className="w-full pl-11 pr-24 py-3.5 bg-slate-900 border border-slate-700 rounded-xl text-white font-semibold text-sm focus:outline-none"
+                            className="w-full min-w-0 pl-10 pr-4 py-3 bg-slate-900 border border-slate-700 rounded-xl text-white font-semibold text-sm focus:outline-none focus:border-emerald-500"
                           />
                         </div>
                       </div>
 
-                      <div className="bg-slate-950/60 border border-slate-800/90 rounded-2xl p-5">
+                      {/* Step 2: Amount Slider */}
+                      <div className="bg-slate-950/60 border border-slate-800/90 rounded-2xl p-4 sm:p-5">
                         <div className="flex flex-wrap items-center justify-between gap-2 mb-3">
-                          <label className="text-sm font-bold text-white">2. Select Amount of Robux</label>
-                          <div className="flex items-center gap-2">
-                            <span className="px-3 py-1 rounded-lg bg-emerald-500/15 border border-emerald-500/30 text-emerald-400 font-extrabold text-base">
+                          <label className="text-xs sm:text-sm font-bold text-white">2. Select Robux Amount</label>
+                          <div className="flex items-center gap-1.5">
+                            <span className="px-2.5 py-1 rounded-lg bg-emerald-500/15 border border-emerald-500/30 text-emerald-400 font-extrabold text-xs sm:text-sm">
                               {orderRobux} R$
                             </span>
-                            <span className="text-slate-400 font-bold">=</span>
-                            <span className="px-3 py-1 rounded-lg bg-amber-500/15 border border-amber-500/30 text-amber-300 font-extrabold text-base">
+                            <span className="text-slate-400 font-bold text-xs">=</span>
+                            <span className="px-2.5 py-1 rounded-lg bg-amber-500/15 border border-amber-500/30 text-amber-300 font-extrabold text-xs sm:text-sm">
                               Rs. {orderNprPrice}
                             </span>
                           </div>
@@ -918,30 +969,65 @@
                           onChange={(e) => setOrderRobux(Number(e.target.value))}
                           className="w-full h-2.5 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-emerald-400 my-2"
                         />
+                        <div className="flex justify-between text-[10px] font-semibold text-slate-400 mt-1">
+                          <span>50 R$ (Rs. 200)</span>
+                          <span>1000 R$</span>
+                          <span>5000 R$</span>
+                        </div>
                       </div>
 
-                      <div className="bg-slate-950/60 border border-slate-800/90 rounded-2xl p-5 space-y-4">
-                        <label className="text-sm font-bold text-white block">3. Attach Payment Proof (Screenshot)</label>
+                      {/* Mobile-Only Inline QR Code Card (Shows right before proof upload on phones) */}
+                      <div className="block lg:hidden bg-gradient-to-b from-slate-900 to-slate-950 border-2 border-emerald-500/40 rounded-2xl p-4 shadow-xl">
+                        <div className="flex items-center justify-between mb-3">
+                          <div className="flex items-center gap-1.5">
+                            <QrCode className="w-4 h-4 text-emerald-400" />
+                            <h4 className="font-extrabold text-white text-sm">Scan & Pay Rs. {orderNprPrice}</h4>
+                          </div>
+                          <span className="px-2 py-0.5 rounded-full bg-emerald-500/15 border border-emerald-500/30 text-emerald-300 text-[10px] font-bold">
+                            eSewa QR
+                          </span>
+                        </div>
+                        <div className="bg-[#161e27] border border-slate-700/80 rounded-2xl p-4 flex flex-col items-center justify-center mx-auto max-w-[230px]">
+                          <div className="bg-white rounded-xl p-2 shadow-md">
+                            <img
+                              src={shopSettings.qrImageUrl || DEFAULT_ESEWA_QR_URL}
+                              alt="eSewa QR Code"
+                              className="w-40 h-40 object-contain rounded-md"
+                            />
+                          </div>
+                          <div className="mt-2.5 flex items-center justify-center gap-1.5">
+                            <div className="w-5 h-5 rounded-full bg-[#60bb46] flex items-center justify-center text-white font-serif font-bold text-xs">e</div>
+                            <span className="text-white font-serif text-lg font-medium">Sewa</span>
+                          </div>
+                        </div>
+                        <p className="mt-3 text-center text-[11px] font-semibold text-amber-300">
+                          {shopSettings.paymentNote}
+                        </p>
+                      </div>
+
+                      {/* Step 3: Payment Proof */}
+                      <div className="bg-slate-950/60 border border-slate-800/90 rounded-2xl p-4 sm:p-5 space-y-3.5">
+                        <label className="text-xs sm:text-sm font-bold text-white block">3. Attach Payment Proof (Screenshot)</label>
                         <input
                           type="text"
                           value={transactionRef}
                           onChange={(e) => setTransactionRef(e.target.value)}
                           placeholder="Transaction Code / Reference ID (Optional)"
-                          className="w-full px-4 py-2.5 bg-slate-900 border border-slate-700 rounded-xl text-white text-sm"
+                          className="w-full min-w-0 px-3.5 py-2.5 bg-slate-900 border border-slate-700 rounded-xl text-white text-xs sm:text-sm"
                         />
-                        <div className="border-2 border-dashed border-slate-700 hover:border-emerald-500/60 rounded-2xl p-5 text-center bg-slate-900/50">
+                        <div className="border-2 border-dashed border-slate-700 hover:border-emerald-500/60 rounded-2xl p-4 sm:p-5 text-center bg-slate-900/50">
                           <input type="file" id="proof-upload" accept="image/*" onChange={handleProofUpload} className="hidden" />
                           <label htmlFor="proof-upload" className="cursor-pointer flex flex-col items-center justify-center space-y-2">
                             {proofBase64 ? (
-                              <div className="space-y-2">
-                                <img src={proofBase64} alt="Preview" className="max-h-44 rounded-xl mx-auto border border-emerald-500/40" />
-                                <span className="text-xs font-bold text-emerald-400 block">{proofFileName} (Click to change)</span>
+                              <div className="space-y-2 w-full">
+                                <img src={proofBase64} alt="Preview" className="max-h-40 rounded-xl mx-auto border border-emerald-500/40 object-contain" />
+                                <span className="text-xs font-bold text-emerald-400 block truncate px-2">{proofFileName} (Tap to change)</span>
                               </div>
                             ) : (
                               <>
-                                <Upload className="w-8 h-8 text-emerald-400" />
-                                <div className="text-sm font-bold text-white">Click to Upload Payment Screenshot</div>
-                                <p className="text-xs text-slate-400">Pay Rs. {orderNprPrice} via eSewa QR and attach receipt.</p>
+                                <Upload className="w-7 h-7 text-emerald-400" />
+                                <div className="text-xs sm:text-sm font-bold text-white">Tap to Upload Payment Screenshot</div>
+                                <p className="text-[11px] text-slate-400">Pay Rs. {orderNprPrice} via eSewa QR and attach receipt.</p>
                               </>
                             )}
                           </label>
@@ -949,12 +1035,12 @@
                       </div>
 
                       {orderFormError && (
-                        <div className="p-3.5 rounded-xl bg-rose-500/10 border border-rose-500/30 text-rose-300 text-xs font-semibold">
+                        <div className="p-3 rounded-xl bg-rose-500/10 border border-rose-500/30 text-rose-300 text-xs font-semibold">
                           {orderFormError}
                         </div>
                       )}
                       {orderSuccessToast && (
-                        <div className="p-4 rounded-xl bg-emerald-500/15 border border-emerald-500/40 text-emerald-300 text-sm font-bold">
+                        <div className="p-3.5 rounded-xl bg-emerald-500/15 border border-emerald-500/40 text-emerald-300 text-xs sm:text-sm font-bold">
                           {orderSuccessToast}
                         </div>
                       )}
@@ -962,15 +1048,15 @@
                       <button
                         type="submit"
                         disabled={isSubmittingOrder}
-                        className="w-full py-4 rounded-2xl bg-gradient-to-r from-emerald-500 to-teal-400 text-slate-950 font-black text-base shadow-xl"
+                        className="w-full py-3.5 sm:py-4 rounded-2xl bg-gradient-to-r from-emerald-500 to-teal-400 text-slate-950 font-black text-sm sm:text-base shadow-xl"
                       >
                         {isSubmittingOrder ? 'Submitting Order...' : `Submit Order (${orderRobux} R$ for Rs. ${orderNprPrice})`}
                       </button>
                     </form>
                   </div>
 
-                  {/* Right Column: Clean eSewa QR Card (Name & Number Removed) */}
-                  <div className="lg:col-span-5 space-y-6 lg:sticky lg:top-24">
+                  {/* Desktop Right Column: Clean eSewa QR Card */}
+                  <div className="hidden lg:block lg:col-span-5 space-y-6 lg:sticky lg:top-24">
                     <div className="bg-gradient-to-b from-slate-900 to-slate-950 border-2 border-emerald-500/40 rounded-3xl p-6 shadow-2xl">
                       <div className="flex items-center justify-between mb-4">
                         <div className="flex items-center gap-2">
@@ -1012,11 +1098,11 @@
                 </section>
 
                 {/* 3. Live Order Status Bar */}
-                <section ref={trackerSectionRef} className="bg-slate-900/90 border border-slate-800 rounded-3xl p-6 sm:p-8 shadow-xl">
-                  <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-800 pb-6 mb-6">
+                <section ref={trackerSectionRef} className="bg-slate-900/90 border border-slate-800 rounded-2xl sm:rounded-3xl p-4 sm:p-8 shadow-xl">
+                  <div className="flex flex-col md:flex-row md:items-center justify-between gap-3 border-b border-slate-800 pb-5 mb-5">
                     <div>
-                      <span className="text-xs font-bold uppercase text-emerald-400">PRIVATE ACCOUNT ORDER TRACKER</span>
-                      <h3 className="text-2xl font-extrabold text-white mt-0.5">Your Live Order & Delivery Status</h3>
+                      <span className="text-[11px] font-bold uppercase text-emerald-400">PRIVATE ACCOUNT ORDER TRACKER</span>
+                      <h3 className="text-xl sm:text-2xl font-extrabold text-white mt-0.5">Your Live Order & Delivery Status</h3>
                     </div>
                     <div className="w-full md:w-80">
                       <input
@@ -1024,15 +1110,15 @@
                         value={searchQuery}
                         onChange={(e) => { setSearchQuery(e.target.value); setTrackedOrderId(''); }}
                         placeholder="Filter orders by ID or Username..."
-                        className="w-full px-4 py-2 bg-slate-950 border border-slate-700 rounded-xl text-xs text-white"
+                        className="w-full px-3.5 py-2.5 bg-slate-950 border border-slate-700 rounded-xl text-xs text-white"
                       />
                     </div>
                   </div>
 
                   {!customerAccount ? (
-                    <div className="text-center py-10 space-y-4 bg-slate-950/60 border border-slate-800 rounded-2xl">
+                    <div className="text-center py-8 px-3 space-y-4 bg-slate-950/60 border border-slate-800 rounded-2xl">
                       <Lock className="w-8 h-8 text-emerald-400 mx-auto" />
-                      <h4 className="text-base font-extrabold text-white">Log In to See Your Private Orders</h4>
+                      <h4 className="text-sm sm:text-base font-extrabold text-white">Log In to See Your Private Orders</h4>
                       <button
                         type="button"
                         onClick={() => { setAuthMode('login'); setAuthError(''); setShowAuthModal(true); }}
@@ -1042,7 +1128,7 @@
                       </button>
                     </div>
                   ) : currentTrackedOrder ? (
-                    <div className="space-y-6">
+                    <div className="space-y-5">
                       <div className="flex flex-wrap gap-2">
                         {myCustomerOrders.map((ord) => (
                           <button
@@ -1059,10 +1145,10 @@
                         ))}
                       </div>
 
-                      <div className="grid grid-cols-1 sm:grid-cols-4 gap-4">
+                      <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 sm:gap-4">
                         {[
-                          { step: 1, title: '1. Submitted', desc: 'Receipt attached' },
-                          { step: 2, title: '2. Checking Payment', desc: 'Verifying eSewa' },
+                          { step: 1, title: '1. Submitted', desc: 'Receipt sent' },
+                          { step: 2, title: '2. Checking', desc: 'Verifying eSewa' },
                           { step: 3, title: '3. Delivering', desc: 'Sending Robux' },
                           { step: 4, title: '4. Delivered!', desc: 'Complete' }
                         ].map((item) => {
@@ -1071,34 +1157,34 @@
                           return (
                             <div
                               key={item.step}
-                              className={`p-4 rounded-2xl border ${
+                              className={`p-3 sm:p-4 rounded-xl sm:rounded-2xl border ${
                                 isCompleted ? 'bg-emerald-500/15 border-emerald-400' : 'bg-slate-950/40 border-slate-800 opacity-50'
                               }`}
                             >
-                              <div className="font-extrabold text-sm text-white">{item.title}</div>
-                              <div className="text-xs text-slate-400 mt-1">{item.desc}</div>
+                              <div className="font-extrabold text-xs sm:text-sm text-white">{item.title}</div>
+                              <div className="text-[11px] text-slate-400 mt-0.5">{item.desc}</div>
                             </div>
                           );
                         })}
                       </div>
 
-                      <div className="p-4 rounded-2xl bg-slate-950 border border-slate-800 text-xs sm:text-sm text-slate-300">
+                      <div className="p-3.5 sm:p-4 rounded-2xl bg-slate-950 border border-slate-800 text-xs sm:text-sm text-slate-300 break-words">
                         <strong className="text-white">Live Server Update:</strong> {currentTrackedOrder.adminNote}
                       </div>
 
                       {currentTrackedOrder.status === 'DELIVERED' && !currentTrackedOrder.reviewed && (
                         <form onSubmit={handleAddReview} className="bg-slate-950 border border-emerald-500/40 rounded-2xl p-4 space-y-3">
                           <div className="text-xs font-bold text-emerald-400 uppercase">Leave a Review for Your Order</div>
-                          <div className="flex gap-2">
+                          <div className="flex flex-col sm:flex-row gap-2">
                             <input
                               type="text"
                               required
                               value={reviewComment}
                               onChange={(e) => setReviewComment(e.target.value)}
                               placeholder="How fast was your delivery?"
-                              className="flex-1 px-4 py-2 bg-slate-900 border border-slate-700 rounded-xl text-sm text-white"
+                              className="flex-1 px-4 py-2.5 bg-slate-900 border border-slate-700 rounded-xl text-sm text-white"
                             />
-                            <button type="submit" className="px-5 py-2 rounded-xl bg-emerald-500 text-slate-950 font-extrabold text-xs">
+                            <button type="submit" className="px-5 py-2.5 rounded-xl bg-emerald-500 text-slate-950 font-extrabold text-xs">
                               Post Review
                             </button>
                           </div>
@@ -1106,7 +1192,7 @@
                       )}
                     </div>
                   ) : (
-                    <div className="text-center py-8 text-sm text-slate-400">
+                    <div className="text-center py-8 text-xs sm:text-sm text-slate-400 break-all">
                       No orders found under {customerAccount.email} yet.
                     </div>
                   )}
@@ -1116,8 +1202,8 @@
 
             {/* Reviews Tab */}
             {activeTab === 'reviews' && (
-              <section className="max-w-4xl mx-auto bg-slate-900 border border-slate-800 rounded-3xl p-6 sm:p-8 space-y-6">
-                <h3 className="text-2xl font-extrabold text-white">Verified Customer Reviews</h3>
+              <section className="max-w-4xl mx-auto bg-slate-900 border border-slate-800 rounded-2xl sm:rounded-3xl p-4 sm:p-8 space-y-6">
+                <h3 className="text-xl sm:text-2xl font-extrabold text-white">Verified Customer Reviews</h3>
                 <form onSubmit={handleAddReview} className="space-y-4 border-b border-slate-800 pb-6">
                   <input
                     type="text"
@@ -1136,7 +1222,7 @@
                     className="w-full px-4 py-2.5 bg-slate-950 border border-slate-800 rounded-xl text-sm text-white"
                   />
                   {reviewSubmittedMsg && <p className="text-xs font-bold text-emerald-400">{reviewSubmittedMsg}</p>}
-                  <button type="submit" className="px-6 py-2.5 rounded-xl bg-emerald-500 text-slate-950 font-extrabold text-xs">
+                  <button type="submit" className="w-full sm:w-auto px-6 py-2.5 rounded-xl bg-emerald-500 text-slate-950 font-extrabold text-xs">
                     Submit Review
                   </button>
                 </form>
@@ -1144,10 +1230,10 @@
                   {reviews.map((r) => (
                     <div key={r.id} className="bg-slate-950 border border-slate-800 rounded-2xl p-4 space-y-2">
                       <div className="flex justify-between text-xs">
-                        <strong className="text-white">@{r.robloxUsername}</strong>
-                        <span className="text-emerald-400 font-bold">{r.robuxAmount} R$</span>
+                        <strong className="text-white truncate">@{r.robloxUsername}</strong>
+                        <span className="text-emerald-400 font-bold shrink-0">{r.robuxAmount} R$</span>
                       </div>
-                      <p className="text-xs text-slate-300">"{r.comment}"</p>
+                      <p className="text-xs text-slate-300 break-words">"{r.comment}"</p>
                     </div>
                   ))}
                 </div>
@@ -1156,21 +1242,21 @@
 
             {/* Terms Tab */}
             {activeTab === 'policies' && (
-              <section className="max-w-4xl mx-auto bg-slate-900 border border-slate-800 rounded-3xl p-6 sm:p-8 space-y-4">
-                <h2 className="text-2xl font-extrabold text-white">Terms of Service & 100% Anti-Scam Guarantee</h2>
-                <p className="text-sm text-slate-300">1. Every order is logged with a unique tracking ID and delivered straight to your Roblox account once your eSewa payment screenshot is verified.</p>
-                <p className="text-sm text-slate-300">2. Official Rate: 100 Robux = Rs. 350 (Minimum Order: 50 Robux = Rs. 200).</p>
-                <p className="text-sm text-slate-300">3. Submitting fake or edited payment screenshots results in immediate order cancellation.</p>
+              <section className="max-w-4xl mx-auto bg-slate-900 border border-slate-800 rounded-2xl sm:rounded-3xl p-4 sm:p-8 space-y-4">
+                <h2 className="text-xl sm:text-2xl font-extrabold text-white">Terms of Service & 100% Anti-Scam Guarantee</h2>
+                <p className="text-xs sm:text-sm text-slate-300">1. Every order is logged with a unique tracking ID and delivered straight to your Roblox account once your eSewa payment screenshot is verified.</p>
+                <p className="text-xs sm:text-sm text-slate-300">2. Official Rate: 100 Robux = Rs. 350 (Minimum Order: 50 Robux = Rs. 200).</p>
+                <p className="text-xs sm:text-sm text-slate-300">3. Submitting fake or edited payment screenshots results in immediate order cancellation.</p>
               </section>
             )}
 
-            {/* Hidden Seller Portal (Private PIN Verified on Server) */}
+            {/* Hidden Seller Portal */}
             {activeTab === 'admin' && (
-              <section className="space-y-8">
+              <section className="space-y-6">
                 {!isAdminUnlocked ? (
-                  <div className="max-w-md mx-auto bg-slate-900 border border-slate-800 rounded-3xl p-8 text-center space-y-5">
+                  <div className="max-w-md mx-auto bg-slate-900 border border-slate-800 rounded-2xl sm:rounded-3xl p-6 sm:p-8 text-center space-y-5">
                     <Lock className="w-10 h-10 text-amber-400 mx-auto" />
-                    <h3 className="text-2xl font-extrabold text-white">Seller Portal Login</h3>
+                    <h3 className="text-xl sm:text-2xl font-extrabold text-white">Seller Portal Login</h3>
                     <form onSubmit={handleAdminUnlock} className="space-y-4">
                       <input
                         type="password"
@@ -1187,9 +1273,9 @@
                   </div>
                 ) : (
                   <div className="space-y-6">
-                    <div className="bg-slate-900 border border-amber-500/30 rounded-3xl p-6 flex flex-wrap items-center justify-between gap-4">
+                    <div className="bg-slate-900 border border-amber-500/30 rounded-2xl sm:rounded-3xl p-4 sm:p-6 flex flex-wrap items-center justify-between gap-3">
                       <div>
-                        <h2 className="text-2xl font-extrabold text-white">Seller Order & Delivery Center</h2>
+                        <h2 className="text-lg sm:text-2xl font-extrabold text-white">Seller Order & Delivery Center</h2>
                         <p className="text-xs text-slate-400">Pending Orders: {pendingOrdersCount} | Total: {orders.length}</p>
                       </div>
                       <button
@@ -1202,47 +1288,47 @@
 
                     <div className="space-y-4">
                       {filteredAdminOrders.map((order) => (
-                        <div key={order.id} className="bg-slate-900 border border-slate-800 rounded-2xl p-5 flex flex-col lg:flex-row justify-between gap-4">
-                          <div className="space-y-1">
-                            <div className="flex items-center gap-2">
+                        <div key={order.id} className="bg-slate-900 border border-slate-800 rounded-2xl p-4 sm:p-5 flex flex-col lg:flex-row justify-between gap-4">
+                          <div className="space-y-1 min-w-0">
+                            <div className="flex flex-wrap items-center gap-2">
                               <span className="font-mono font-black text-emerald-400">{order.orderCode}</span>
                               <span className="text-xs bg-slate-800 px-2 py-0.5 rounded text-white">{order.status}</span>
-                              <span className="text-xs text-slate-400">{order.customerEmail}</span>
+                              <span className="text-xs text-slate-400 break-all">{order.customerEmail}</span>
                             </div>
-                            <p className="text-sm text-white">
+                            <p className="text-xs sm:text-sm text-white break-words">
                               Roblox User: <strong>{order.robloxUsername}</strong> • <strong>{order.robuxAmount} R$</strong> (Rs. {order.nprAmount})
                             </p>
                           </div>
-                          <div className="flex flex-wrap items-center gap-2">
+                          <div className="grid grid-cols-2 sm:flex sm:flex-wrap items-center gap-2">
                             {order.proofImage && (
                               <button
                                 onClick={() => setPreviewProofModal(order)}
-                                className="px-3 py-2 rounded-xl bg-slate-800 text-xs font-bold text-emerald-300"
+                                className="px-3 py-2 rounded-xl bg-slate-800 text-xs font-bold text-emerald-300 text-center"
                               >
-                                View Screenshot
+                                Screenshot
                               </button>
                             )}
                             <button
                               onClick={() => handleUpdateOrderStatus(order.id, 'CHECKING_PAYMENT')}
-                              className="px-3 py-2 rounded-xl bg-amber-400/20 text-amber-300 text-xs font-bold"
+                              className="px-3 py-2 rounded-xl bg-amber-400/20 text-amber-300 text-xs font-bold text-center"
                             >
-                              1. Checking Payment
+                              1. Checking
                             </button>
                             <button
                               onClick={() => handleUpdateOrderStatus(order.id, 'DELIVERING')}
-                              className="px-3 py-2 rounded-xl bg-sky-400/20 text-sky-300 text-xs font-bold"
+                              className="px-3 py-2 rounded-xl bg-sky-400/20 text-sky-300 text-xs font-bold text-center"
                             >
                               2. Delivering
                             </button>
                             <button
                               onClick={() => handleUpdateOrderStatus(order.id, 'DELIVERED')}
-                              className="px-4 py-2 rounded-xl bg-emerald-500 text-slate-950 text-xs font-black"
+                              className="px-3 py-2 rounded-xl bg-emerald-500 text-slate-950 text-xs font-black text-center"
                             >
-                              3. Deliver Robux ✓
+                              3. Deliver ✓
                             </button>
                             <button
                               onClick={() => handleUpdateOrderStatus(order.id, 'REJECTED')}
-                              className="px-3 py-2 rounded-xl bg-rose-500/20 text-rose-400 text-xs font-bold"
+                              className="px-3 py-2 rounded-xl bg-rose-500/20 text-rose-400 text-xs font-bold text-center"
                             >
                               Reject
                             </button>
@@ -1252,8 +1338,8 @@
                     </div>
 
                     {/* Admin QR & PIN Settings */}
-                    <div className="bg-slate-900 border border-slate-800 rounded-3xl p-6 space-y-4">
-                      <h3 className="text-lg font-extrabold text-white">QR & Security Settings</h3>
+                    <div className="bg-slate-900 border border-slate-800 rounded-2xl sm:rounded-3xl p-4 sm:p-6 space-y-4">
+                      <h3 className="text-base sm:text-lg font-extrabold text-white">QR & Security Settings</h3>
                       <form onSubmit={handleSaveShopSettings} className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div>
                           <label className="block text-xs font-bold text-slate-400 mb-1">Upload Custom QR Image</label>
@@ -1290,26 +1376,26 @@
 
           {/* Screenshot Preview Modal */}
           {previewProofModal && (
-            <div className="fixed inset-0 z-50 bg-slate-950/85 flex items-center justify-center p-4">
-              <div className="bg-slate-900 border border-slate-700 rounded-3xl max-w-lg w-full p-6 space-y-4">
+            <div className="fixed inset-0 z-50 bg-slate-950/85 flex items-center justify-center p-3 sm:p-4">
+              <div className="bg-slate-900 border border-slate-700 rounded-2xl sm:rounded-3xl max-w-lg w-full p-4 sm:p-6 space-y-4">
                 <div className="flex justify-between items-center">
-                  <h4 className="font-extrabold text-white">Payment Proof • {previewProofModal.orderCode}</h4>
-                  <button onClick={() => setPreviewProofModal(null)} className="text-slate-400 hover:text-white">✕</button>
+                  <h4 className="font-extrabold text-white text-sm sm:text-base">Payment Proof • {previewProofModal.orderCode}</h4>
+                  <button onClick={() => setPreviewProofModal(null)} className="text-slate-400 hover:text-white p-1">✕</button>
                 </div>
-                <img src={previewProofModal.proofImage} alt="Proof" className="rounded-xl max-h-[60vh] mx-auto object-contain" />
+                <img src={previewProofModal.proofImage} alt="Proof" className="rounded-xl max-h-[60vh] mx-auto object-contain w-full" />
               </div>
             </div>
           )}
 
           {/* Customer Login / Signup Modal */}
           {showAuthModal && (
-            <div className="fixed inset-0 z-50 bg-slate-950/85 flex items-center justify-center p-4">
-              <div className="bg-slate-900 border border-slate-800 rounded-3xl max-w-md w-full p-6 space-y-5">
+            <div className="fixed inset-0 z-50 bg-slate-950/85 flex items-center justify-center p-3 sm:p-4">
+              <div className="bg-slate-900 border border-slate-800 rounded-2xl sm:rounded-3xl max-w-md w-full p-5 sm:p-6 space-y-5">
                 <div className="flex justify-between items-center">
-                  <h3 className="text-lg font-extrabold text-white">
+                  <h3 className="text-base sm:text-lg font-extrabold text-white">
                     {authMode === 'login' ? 'Customer Login' : 'Create Customer Account'}
                   </h3>
-                  <button onClick={() => setShowAuthModal(false)} className="text-slate-400">✕</button>
+                  <button onClick={() => setShowAuthModal(false)} className="text-slate-400 p-1">✕</button>
                 </div>
 
                 <div className="grid grid-cols-2 gap-2 p-1 bg-slate-950 rounded-xl">
@@ -1329,7 +1415,7 @@
                   </button>
                 </div>
 
-                <form onSubmit={handleCustomerAuthSubmit} className="space-y-4">
+                <form onSubmit={handleCustomerAuthSubmit} className="space-y-3.5">
                   <input
                     type="email"
                     required
