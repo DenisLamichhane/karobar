@@ -7,7 +7,9 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 const DB_FILE = path.join(__dirname, 'database.json');
 
-// Private Seller PIN (Can also be overridden via environment variable on Render)
+// 🔔 PASTE YOUR DISCORD WEBHOOK URL HERE (or use process.env.DISCORD_WEBHOOK_URL)
+const DISCORD_WEBHOOK_URL = process.env.DISCORD_WEBHOOK_URL || 'https://discord.com/api/webhooks/1563063402006585417/0vSkpJ3i9WzFkowt1O9NdVLedU6nL3QHznpND6d41GdQXq_ZefsX8VtpBVZu6tFq2FyG';
+
 const SECRET_ADMIN_PIN = process.env.ADMIN_PIN || '1973';
 
 app.use(cors());
@@ -45,7 +47,42 @@ function writeDB(data) {
   }
 }
 
-// 1. GET PUBLIC STATE (Never sends Admin PIN to browser)
+// Helper function to send Discord Webhook notification
+async function sendDiscordNotification(order) {
+  if (!DISCORD_WEBHOOK_URL || DISCORD_WEBHOOK_URL.includes('YOUR_DISCORD_WEBHOOK_URL')) return;
+
+  try {
+    const payload = {
+      content: "🚨 **NEW ROBUX ORDER RECEIVED!** 🚨",
+      embeds: [
+        {
+          title: `📦 Order ID: ${order.orderCode}`,
+          color: 3066993, // Emerald green sidebar color
+          fields: [
+            { name: "👤 Roblox User", value: `\`${order.robloxUsername}\``, inline: true },
+            { name: "💎 Robux Amount", value: `**${order.robuxAmount} R$**`, inline: true },
+            { name: "💵 Price Paid", value: `**Rs. ${order.nprAmount}**`, inline: true },
+            { name: "📧 Customer Email", value: order.customerEmail, inline: false },
+            { name: "🔖 Transaction Ref", value: order.transactionRef || 'Not Provided', inline: true },
+            { name: "⏳ Status", value: "Submitted (Awaiting Proof Verification)", inline: true }
+          ],
+          timestamp: new Date().toISOString()
+        }
+      ]
+    };
+
+    // Use native fetch in Node.js to post to Discord
+    await fetch(DISCORD_WEBHOOK_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+  } catch (err) {
+    console.error('Failed to send Discord webhook:', err);
+  }
+}
+
+// 1. GET PUBLIC STATE
 app.get('/api/state', (req, res) => {
   const db = readDB();
   res.json({
@@ -58,7 +95,7 @@ app.get('/api/state', (req, res) => {
   });
 });
 
-// 2. VERIFY SELLER PIN ON SERVER
+// 2. VERIFY SELLER PIN
 app.post('/api/admin/verify', (req, res) => {
   const { pin } = req.body;
   const db = readDB();
@@ -103,8 +140,8 @@ app.post('/api/accounts', (req, res) => {
   }
 });
 
-// 4. CREATE NEW ORDER
-app.post('/api/orders', (req, res) => {
+// 4. CREATE NEW ORDER & TRIGGER DISCORD NOTIFICATION
+app.post('/api/orders', async (req, res) => {
   const db = readDB();
   const shortOrderCode = 'RK-' + Math.floor(100000 + Math.random() * 900000);
   const newOrder = {
@@ -125,6 +162,10 @@ app.post('/api/orders', (req, res) => {
 
   db.orders.unshift(newOrder);
   writeDB(db);
+
+  // Send alert to Discord asynchronously
+  sendDiscordNotification(newOrder);
+
   res.json({ order: newOrder });
 });
 
@@ -167,7 +208,7 @@ app.post('/api/reviews', (req, res) => {
   res.json({ review: newReview });
 });
 
-// 7. SAVE SHOP SETTINGS (Seller Portal)
+// 7. SAVE SHOP SETTINGS
 app.post('/api/settings', (req, res) => {
   const db = readDB();
   db.settings = { ...db.settings, ...req.body };
